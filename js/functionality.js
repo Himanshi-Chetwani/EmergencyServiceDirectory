@@ -495,7 +495,7 @@ const APP = (function () {
                   if (map != undefined) {
                     map.remove();
                   }
-                   map = L.map('mapVis').setView([$("latitude", this).text(), $("longitude", this).text()], 13);
+                  map = L.map('mapVis').setView([$("latitude", this).text(), $("longitude", this).text()], 13);
 
                   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -525,6 +525,7 @@ const APP = (function () {
             output = "No Matches Found"
           }
           else {
+            console.log(data);
             let output = "";
             output += `<div id="people-info"`
             output += `<label for="people">People</label><br>`;
@@ -538,16 +539,33 @@ const APP = (function () {
             $(tabV).html(output);
             output = "";
             $("#people").on('change', function () {
+              output = "";
+              output += `<div>`
+              output += `<table id="results-table-new" class="tablesorter tablesorter-ice"">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Role</th>
+                <th>Contact</th>
+              </tr>
+              </thead>
+              <tbody>`;
               $("site", data).each(function () {
                 if ($(this).attr("siteId") === $("#people").val()) {
-                  output += `<div id ="${$(this).attr("siteId")}" class="person-dets">`;
-                  output += `<p> Name : ${$("honorific", this).text()} ${$("fName", this).text()} ${$("mName", this).text()} ${$("lName", this).text()} ${$("suffix", this).text()}</p>`;
-                  output += `<p> Role : ${$("role", this).text()} </p>`;
-                  output += `<p> Contact Method : ${$("contactmethods", this).text()} </p>`;
-                  output += `</div>`
-                  $("#outputForPeople").html(output);
+
+                  $("person", $(this)).each(function () {
+                    output += `<tr>
+                  <td> ${$("honorific", this).text()} ${$("fName", this).text()} ${$("mName", this).text()} ${$("lName", this).text()} ${$("suffix", this).text()}</td>
+                  <td>${$("role", this).text()}</td>
+                  <td> ${$("contactmethods", this).text()}</td>
+                  </tr>`;
+                  });
                 }
               });
+              output += `</tbody>`;
+              output += "</table>";
+              output += `</div>`;
+              $("#outputForPeople").html(output);
             })
 
           }
