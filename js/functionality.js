@@ -457,8 +457,8 @@ const APP = (function () {
               output += `<table id="mapsTable" class="tablesorter tablesorter-ice">`;
               output += ` <thead>
             <tr>
+            <th>Maps</th>
               <th>Details</th>
-              <th>Maps</th>
             </tr>
             </thead>
             <tbody>`;

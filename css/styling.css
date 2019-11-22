@@ -54,7 +54,13 @@ body{
     background: rgb(204, 44, 44);
     color: white;
 }
-
+#tabs{
+    height: 180px;
+}
+#modalData{
+    max-width: 800px; 
+    height: 900px;
+}
 .emergencyCall h1 {
     border:1px solid rgb(204, 44, 44);
     padding-bottom: 5px;
