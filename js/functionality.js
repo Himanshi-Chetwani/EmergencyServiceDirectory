@@ -457,7 +457,7 @@ const APP = (function () {
               output += `<table id="mapsTable" class="tablesorter tablesorter-ice">`;
               output += ` <thead>
             <tr>
-            <th>Maps</th>
+              <th>Map</th>
               <th>Details</th>
             </tr>
             </thead>
@@ -468,19 +468,9 @@ const APP = (function () {
               output += `<p id = "mapData"></p>`;
               output += `</tr>`
               output += `</tbody`;
-              output += `<table>`;
+              output += `</table>`;
+              var map;
               $("#outputForLocation").html(output);
-              $("#mapVis").height('250px')
-              $("#mapVis").width('250px')
-              var map = L.map('mapVis').setView([43.055091745202, -77.46073722839355], 13);
-
-              L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-              }).addTo(map);
-
-              L.marker([43.055091745202, -77.46073722839355]).addTo(map)
-                .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-                .openPopup();
               $("location", data).each(function () {
                 output = ""
                 if ($("type", this).text() === $("#loc").val()) {
@@ -500,6 +490,20 @@ const APP = (function () {
                   output += `<p>  Site Id : ${$("siteId", this).text()}</p>`;
                   output += `</div>`;
                   $("#mapContents").html(output);
+                  $("#mapVis").height('250px')
+                  $("#mapVis").width('250px')
+                  if (map != undefined) {
+                    map.remove();
+                  }
+                   map = L.map('mapVis').setView([$("latitude", this).text(), $("longitude", this).text()], 13);
+
+                  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                  }).addTo(map);
+
+                  L.marker([$("latitude", this).text(), $("longitude", this).text()]).addTo(map)
+                    .bindPopup($("address1", this).text())
+                    .openPopup();
                 }
               });
             });
