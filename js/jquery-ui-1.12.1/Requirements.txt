@@ -1,0 +1,39 @@
+1. RESTful API Client for an Emergency Service Directory 
+2. Application must provide a search form
+3. Search should allow any combination of properties
+4. Anorganization must be selected from the search results which must display the an iterface 
+itemizing all of the categories of information available for that organization
+5. User can then select any of those categories to see the detailed information.
+-----------------------------------------------------------------------------
+
+1. Search form feilds - 
+organization type (list should populate dynamically from the API)
+organization name 
+state
+city  (list should populate based on the selected states)
+county
+zip code
+
+2. In the list of search results, there should be columns for all of the same fields that are in the search form.
+ The values in the organization name column should be links to the details UI with specific information about that organization.
+
+ Note: When selecting "Physician" as the organization type, the links will still be for the organization name, 
+ and clicking them will display information about the clicked organization, not the individual provider.
+ --------------------------------------------------------------------------------------------
+The details UI must provide an interface for accessing each category of information about the organization, which may include:
+
+General
+Locations
+Treatment
+Training
+Facilities
+Equipment
+Physicians
+People
+
+This interface may be implemented with tabs, an accordion, buttons, etc, but the only categories that should be displayed are those that are returned from a call to the "Tabs" endpoint.
+Selecting any category in the details UI should display all relevant information regarding that category returned from the API.
+
+Note: In the "Locations" category, multiple locations may be returned. All locations need to be displayed, either simultaneously or by allowing the user to select a particular location to view, one-at-a-time.
+
+Note: In the "People" category, entries for multiple locations may be returned. Your application should have the ability to show all entries, as well as to filter by location so that only the entries for the selected location are displayed.
