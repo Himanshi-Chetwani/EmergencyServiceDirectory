@@ -14,7 +14,6 @@ const APP = (function () {
           //do something graceful here
 
         } else {
-          console.log(data,status)
           opts += "<option value=''>All Organization Types</option>";;
           $("row", data).each(function () {
             opts += "<option value= '" +
@@ -57,17 +56,13 @@ const APP = (function () {
       }
     });
   }
-  function identifyState() {
-    let stateVal = $('#state').val();
-    getCities(stateVal);
-  }
   function getCities(stateVal) {
     $.ajax({
       type: "GET",
       async: true,
       cache: false,
       url: proxy,
-      data: { path: "/Cities" },
+      data: { path: "/Cities?state=" + stateVal },
       dataType: "xml",
       success: function (data, status) {
         let opts = "";
@@ -560,20 +555,20 @@ const APP = (function () {
   function clearResults() {
     location.reload();
   }
-  function callSupport(){
+  function callSupport() {
     $("#emCall")
-            .slideFadeOut(1000)
-            .show(2500);
+      .slideFadeOut(1000)
+      .show(2500);
   }
   $(function () {
     $(document).tooltip();
     getOrgTypes();
     getStates();
-    identifyState();
   });
   return {
     displayResults: displayResults,
     clearResults: clearResults,
+    getCities: getCities,
     getDetails: getDetails,
     getData: getData,
     callSupport: callSupport

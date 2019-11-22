@@ -19,7 +19,7 @@
 </head>
 
 <body>
-    <!-- <div class  ="emergencyCall"><h1 id="emCall"> EMERGENCY PHONE NUMBER : DIAL 911</h1></div> -->
+    <div class  ="emergencyCall"><h1 id="emCall"> EMERGENCY PHONE NUMBER : DIAL 911</h1></div>
     <h2>EMERGENCY SEARCH DIRECTORY</h2>
     <form id="search-form">
         <fieldset>
@@ -30,7 +30,7 @@
                     partial - "vol" for "Volunteer"</em></p>
 
             <label for="state"> States</label>
-            <select name="state" id="state" onchange=""></select>
+            <select name="state" id="state" onchange="APP.getCities(document.getElementById('state').value)"></select>
             </label>
             <select name="city" id="cities" onchange=""></select><br>
             <p>County <input id="county" name="CountyName" type="text"></p>
